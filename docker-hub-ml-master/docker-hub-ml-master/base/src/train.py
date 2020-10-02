@@ -1,6 +1,7 @@
 import argparse
 import pickle
 import pandas as pd
+import numpy as np
 from keras.layers import Dense
 from keras.models import Sequential
 from keras import layers
@@ -27,11 +28,11 @@ train_data = pd.read_csv(
 test_data = pd.read_csv(
     '{}/{}'.format(args.mount_path, args.input_test_csv))
 
-# Remove records with empty descriptions
+# Remove records with empty description
 train_data = train_data[train_data.FULL_DESCRIPTION.notna()]
 test_data = test_data[test_data.FULL_DESCRIPTION.notna()]
 
-# Extract full description from datasets
+# Extracting full description from datasets
 train_text = train_data.FULL_DESCRIPTION.tolist()
 test_text = test_data.FULL_DESCRIPTION.tolist()
 
@@ -52,10 +53,10 @@ y_test = test_data.drop(labels=['index', 'FULL_DESCRIPTION', 'NAME', 'DESCRIPTIO
 n_cols = x_train.shape[1]
 model = Sequential()
 
-# input layer of 70 neurons:
+# input layer of 70 neurons
 model.add(Dense(70, activation='relu', input_shape=(n_cols,)))
 
-# output layer of 82 neurons:
+# output layer of 82 neurons
 model.add(Dense(82, activation='sigmoid'))
 
 # determining optimizer, loss, and metrics:
