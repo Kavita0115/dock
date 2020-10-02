@@ -1,4 +1,4 @@
-# Sample for DockerCon EU 2018
+# Sample For DockerCon EU 2018
 
 ---
 
